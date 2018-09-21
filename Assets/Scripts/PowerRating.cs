@@ -49,7 +49,6 @@ public class PowerRating : MonoBehaviour
         #region Score Modifiers
         float hookBonus = 10;
         float powerStraightBonus = 30;
-        float comboBonus = Combat.currentCombo;
         #endregion
 
         // PWR is equal to base before multipliers are applied.
@@ -64,13 +63,13 @@ public class PowerRating : MonoBehaviour
         // after the next hit since the bonus was applied. (active only for that hit)
 
         // If we are leaning left or right.
-        if(Combat.leaningZaxis == true)
+        if(Combat.CombatRef.leaningZaxis == true)
         {
             Debug.Log("hook performed");
             PWR_ += hookBonus;
         }
         // If we are leaning forward or back
-        if(Combat.leaningZaxis == true)
+        if(Combat.CombatRef.leaningZaxis == true)
         {
             Debug.Log("Power Straigt!!");
             PWR_ += powerStraightBonus;

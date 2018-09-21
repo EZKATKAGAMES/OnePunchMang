@@ -4,13 +4,15 @@ using UnityEngine;
 
 public class Combat : MonoBehaviour
 {
-    public static bool leaningZaxis; // Left and Right leaning.
-    public static bool leaningXaxis; // Forward and backward leaning.
-    public static float chargePercent;
-    public static int currentCombo;
+    public static Combat CombatRef = null;
 
+    public bool leaningZaxis; // Left and Right leaning.
+    public bool leaningXaxis; // Forward and backward leaning.
+    
+    
 
-    public float chargeMultiplier = 100 / 3;
+    public float chargePercent = 0;
+    public float chargeMultiplier = 50;
 
     // Use this for initialization
     void Start()
@@ -33,6 +35,10 @@ public class Combat : MonoBehaviour
         if(Input.GetKey(KeyCode.Mouse0) || Input.GetKey(KeyCode.Mouse1))
         {
             chargePercent += Time.deltaTime * chargeMultiplier;
+        }
+        else
+        {
+            chargePercent = 0;
         }
 
     }

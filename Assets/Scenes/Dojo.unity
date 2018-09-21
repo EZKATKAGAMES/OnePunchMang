@@ -642,7 +642,7 @@ GameObject:
   m_Layer: 8
   m_Name: FpLeft
   m_TagString: Untagged
-  m_Icon: {fileID: 2974397684917235467, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -859,7 +859,7 @@ GameObject:
   m_Layer: 8
   m_Name: FpRight
   m_TagString: Untagged
-  m_Icon: {fileID: 2974397684917235467, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -1644,6 +1644,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56618bce6b5b58c46991c0817d429259, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  leaningZaxis: 0
+  leaningXaxis: 0
+  chargePercent: 0
+  chargeMultiplier: 50
 --- !u!114 &2112591315
 MonoBehaviour:
   m_ObjectHideFlags: 0
