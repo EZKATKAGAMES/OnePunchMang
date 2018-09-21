@@ -10,9 +10,13 @@ using UnityEngine;
 public class PowerRating : MonoBehaviour
 {
     public static PowerRating PWR = null;
-    public float powerRating;
+    public float currentPlayerPowerRating; // Currently Updated Score.
+    float playerPowerRating; // Used for calcutations.
 
-    private float playerBasePowerRating = 50;
+    
+    float playerEnemyRating; // Used for calcutations.
+
+
     private float enemyBasePowerRating = 25;
 
     private void Awake()
@@ -31,35 +35,86 @@ public class PowerRating : MonoBehaviour
 
     void Start()
     {
-
+        
     }
     
     void Update()
     {
-
+        
     }
 
-    public void PlayerPowerRating(float? PWR)
+    public void PlayerPowerRating(float PWR_)
     {
-        // This score will be calculated from values measured from the player
+        float playerBasePowerRating = 50;
+        #region Score Modifiers
+        float hookBonus = 10;
+        float powerStraightBonus = 30;
+        float comboBonus = Combat.currentCombo;
+        #endregion
 
-        // This score will then be passed onto the player attack handler.
+        // PWR is equal to base before multipliers are applied.
+        PWR_ = playerBasePowerRating;
+
+        // Successive Hits increase powerscore.
+
+
 
         // LEAN & CROUCH & DODGE acts a multiplier altering the score.
+        // Negate these scores from the current powerscore
+        // after the next hit since the bonus was applied. (active only for that hit)
+
+        // If we are leaning left or right.
+        if(Combat.leaningZaxis == true)
+        {
+            Debug.Log("hook performed");
+            PWR_ += hookBonus;
+        }
+        // If we are leaning forward or back
+        if(Combat.leaningZaxis == true)
+        {
+            Debug.Log("Power Straigt!!");
+            PWR_ += powerStraightBonus;
+        }
 
 
-        // Set Base Power Score.
-
-        // IF current player velocity is > 0 use it as a multiplier.
-
-        // Check if LEAN action is used. & apply calculations if it is.
-
-        // Return the 
+        currentPlayerPowerRating = PWR_;
 
     }
 
-    public void EnemyPowerRating()
+    public void EnemyPowerRating(float PWR)
     {
+        float lightEnemyPwrscore = enemyBasePowerRating * 2;
+        float mediumEnemyPwrscore = enemyBasePowerRating * 2.5f;
+        float heavyEnemyPwrscore = enemyBasePowerRating * 3;
+
 
     }
+
+    public void AssignPowerRating()
+    {
+        // Check entity Type.
+        if (gameObject.CompareTag("Player"))
+        {
+            // Overwrite Score.
+            PlayerPowerRating(currentPlayerPowerRating);
+
+        }
+
+        if (gameObject.CompareTag("Light"))
+        {
+
+        }
+
+        if (gameObject.CompareTag("Medium"))
+        {
+
+        }
+
+        if (gameObject.CompareTag("Heavy"))
+        {
+
+        }
+
+    }   
+    
 }
