@@ -4,7 +4,7 @@ using UnityEngine;
 ///////////////////////////////////////////////////////////////////////////
 //
 // This script will calculate the power rating of your attack
-// based on the current velocity of your character / character components.
+// based on the current state of your character / character components.
 //
 //////////////////////////////////////////////////////////////////////////
 public class PowerRating : MonoBehaviour
@@ -63,6 +63,7 @@ public class PowerRating : MonoBehaviour
         // after the next hit since the bonus was applied. (active only for that hit)
 
         // If we are leaning left or right.
+/*
         if(Combat.CombatRef.leaningZaxis == true)
         {
             Debug.Log("hook performed");
@@ -74,7 +75,7 @@ public class PowerRating : MonoBehaviour
             Debug.Log("Power Straigt!!");
             PWR_ += powerStraightBonus;
         }
-
+*/
 
         currentPlayerPowerRating = PWR_;
 
@@ -114,6 +115,12 @@ public class PowerRating : MonoBehaviour
 
         }
 
-    }   
+    }
+    
+
+    public void CompareRating(float score1, float score2)
+    {
+
+    }
     
 }
