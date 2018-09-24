@@ -14,17 +14,23 @@ using UnityEngine;
 
 public class BoneIntegrity : MonoBehaviour
 {
+    public static BoneIntegrity BoneHealth;
+
     public float leftArmHp = 100f;
     public float rightArmHp = 100f;
     public static Collider leftArm;
     public static Collider rightArm;
+    public bool reduceIncomingDamage;
 
-    private Animator animations;
+    public Collider[] limbColliders;
 
+    private Animator[] animations;
+    
 
     private void Awake()
     {
-        animations = GetComponent<Animator>();
+        animations = GetComponents<Animator>();
+        limbColliders = GetComponentsInChildren<Collider>();
     }
 
     void Start()
@@ -34,7 +40,20 @@ public class BoneIntegrity : MonoBehaviour
     
     void Update()
     {
-        
+        if(reduceIncomingDamage == true)
+        {
+
+        }  
+    }
+
+    public void TakeDamage(Collider[] limbs, float amount)
+    {
+        limbs = GetComponents<Collider>();
+
+        foreach (Collider Arms in limbs)
+        {
+            
+        }
     }
 
     public void LimbBreak(Collider col, float limbID)

@@ -120,6 +120,32 @@ public class PowerRating : MonoBehaviour
 
     public void CompareRating(float score1, float score2)
     {
+        float losingScore = Mathf.Min(score1, score2);
+        float winningScore = Mathf.Max(score1, score2);
+
+        // Call take damage funciton
+        if(currentPlayerPowerRating <= losingScore)
+        {
+            // Figure out which limb called the function.
+
+            // Take damage onto that limb.
+
+        }
+
+        // If we are hit and not blocking & did not parry.
+        if (Combat.CombatRef.blocking == false && currentPlayerPowerRating < winningScore)
+        {
+            // Dying in one hit.
+            BoneIntegrity.BoneHealth.TakeDamage(BoneIntegrity.BoneHealth.limbColliders, 100);
+        }
+        
+
+        // Apply damage onto enemy.
+        if (currentPlayerPowerRating == winningScore)
+        {
+            // Apply Damage onto enemy.
+        }
+
 
     }
     
