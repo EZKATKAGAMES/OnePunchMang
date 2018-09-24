@@ -18,29 +18,32 @@ public class Combat : MonoBehaviour
     public bool rightPunch;
     public bool leftPunch;
 
+    public bool blocking;
+
     public float chargePercent = 0;
     public float chargeMultiplier = 50;
-
-    private Animator animations;
+    // Get individual animators
+    private Animator[] animations;
+    
 
     private void Awake()
     {
-        animations = gameObject.GetComponentInChildren<Animator>();
+        animations = gameObject.GetComponentsInChildren<Animator>();
+        
     }
 
     void Start()
     {
         Cursor.visible = false;
-        Debug.Log(animations.gameObject.name);
+
+        
     }
 
     
     void Update()
     {
         SetPowerRating();
-
-        RightPunch();
-        LeftPunch();
+        PunchingAndBlock();
 
         // When Performing a charged straight or right.
         if(Input.GetKey(KeyCode.Mouse0) || Input.GetKey(KeyCode.Mouse1))
@@ -54,33 +57,44 @@ public class Combat : MonoBehaviour
 
     }
 
-    #region Punching activation
-    void RightPunch()
-    {
-        // Enable collider
+    #region Punching & Block activation
 
-        
-        if (Input.GetKeyDown(KeyCode.Mouse1))
-        {
-            // Play animation
-            animations.SetBool("RightStraight", true);
-            StartCoroutine(rightPunchCD());
-        }
-    }
-
-    void LeftPunch()
+    void PunchingAndBlock()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse0))
+        foreach (Animator components in animations)
         {
-            animations.SetBool("LeftStraight", true);
-            StartCoroutine(leftPunchCD());
+            Debug.Log(components.name);
+            #region Punch
+            // Right hand
+            if (Input.GetKeyDown(KeyCode.Mouse1))
+            {
+                components.SetBool("RightStraight", true);
+                StartCoroutine(rightPunchCD());
+            }
+
+            // Left hand
+            if (Input.GetKeyDown(KeyCode.Mouse0))
+            {
+                components.SetBool("LeftStraight", true);
+                StartCoroutine(leftPunchCD());
+            }
+            #endregion
+
+            #region Block
+
+            if (Input.GetKeyDown(KeyCode.LeftControl))
+            {
+                blocking = true;
+            }
+
+            #endregion
         }
     }
 
     IEnumerator leftPunchCD()
     {
         yield return new WaitForSeconds(0.1f);
-        animations.SetBool("LeftStraight", false);
+        animations[0].SetBool("LeftStraight", false);
         yield return new WaitForSeconds(0.1f);
         StopCoroutine(leftPunchCD());
     }
@@ -88,10 +102,16 @@ public class Combat : MonoBehaviour
     IEnumerator rightPunchCD()
     {
         yield return new WaitForSeconds(0.1f);
-        animations.SetBool("RightStraight", false);
+        animations[1].SetBool("RightStraight", false);
         yield return new WaitForSeconds(0.1f);
         StopCoroutine(rightPunchCD());
     }
+
+    #endregion
+
+    #region Block activation
+
+
 
     #endregion
 
@@ -106,8 +126,7 @@ public class Combat : MonoBehaviour
     }
 
     void chargeAttack()
-    {
-        
+    {    
         PowerRating.PWR.AssignPowerRating();
         Debug.Log(PowerRating.PWR.currentPlayerPowerRating);
     }
