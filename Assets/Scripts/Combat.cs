@@ -35,7 +35,7 @@ public class Combat : MonoBehaviour
     void Start()
     {
         Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Confined;
+        Cursor.lockState = CursorLockMode.Locked;
         
     }
 
@@ -64,6 +64,43 @@ public class Combat : MonoBehaviour
         foreach (Animator components in animations)
         {
             Debug.Log(components.name);
+
+            #region Block
+
+            if (Input.GetKey(KeyCode.LeftControl) && Input.GetKey(KeyCode.Mouse0)
+                || Input.GetKey(KeyCode.LeftControl) && Input.GetKey(KeyCode.Mouse1))
+            {
+                blocking = true;
+            }
+            else
+            {
+                blocking = false;
+            }
+
+            if (blocking && Input.GetKeyDown(KeyCode.Mouse1))
+            {
+                // Play block animation
+                //components.SetBool("RightBlock", true);
+                // enable collider
+
+                // Reduce incoming damage.
+                //BoneIntegrity.BoneHealth.reduceIncomingDamage = true;
+                // Stop block if we lift off of the mouse button
+                StartCoroutine(rightBlockReset());
+            }
+
+            if (blocking && Input.GetKeyDown(KeyCode.Mouse0))
+            {
+                // Play block animation
+                //components.SetBool("LeftBlock", true);
+                // Reduce incoming damage.
+                //BoneIntegrity.BoneHealth.reduceIncomingDamage = true;
+                // Stop block if we lift off of the mouse button
+                StartCoroutine(leftBlockReset());
+            }
+
+            #endregion
+
             #region Punch
             // Right hand
             if (!blocking && Input.GetKeyDown(KeyCode.Mouse1))
@@ -80,38 +117,6 @@ public class Combat : MonoBehaviour
                 components.SetBool("LeftStraight", true);
                 StartCoroutine(leftPunchCD());
             }
-            #endregion
-
-            #region Block
-
-            if (Input.GetKeyDown(KeyCode.LeftControl) && Input.GetKey(KeyCode.Mouse0) 
-                || Input.GetKeyDown(KeyCode.LeftControl) && Input.GetKey(KeyCode.Mouse1))
-            {
-                blocking = true;
-            }
-
-            if (blocking && Input.GetKeyDown(KeyCode.Mouse1))
-            {
-                // Play block animation
-                components.SetBool("RightBlock", true);
-                // enable collider
-
-                // Reduce incoming damage.
-                BoneIntegrity.BoneHealth.reduceIncomingDamage = true;
-                // Stop block if we lift off of the mouse button
-                StartCoroutine(rightBlockReset());
-            }
-
-            if(blocking && Input.GetKeyDown(KeyCode.Mouse0))
-            {
-                // Play block animation
-                components.SetBool("LeftBlock", true);
-                // Reduce incoming damage.
-                BoneIntegrity.BoneHealth.reduceIncomingDamage = true;
-                // Stop block if we lift off of the mouse button
-                StartCoroutine(leftBlockReset());
-            }
-
             #endregion
         }
     }

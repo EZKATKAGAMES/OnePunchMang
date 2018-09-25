@@ -3,66 +3,12 @@ guid: e5ca6e703eb526c488beea9b78e65ff5
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
-    100000: pCube13
-    100002: pCube14
-    100004: pCube15
-    100006: pCube16
-    100008: pCube17
-    100010: pCube18
-    100012: pCube19
-    100014: pCube20
-    100016: pCube21
-    100018: pCube22
-    100020: pCube23
-    100022: pCube24
-    100024: pCube25
-    100026: pCube26
-    100028: transform1
-    100030: transform10
-    100032: transform11
-    100034: transform12
-    100036: transform13
-    100038: transform2
-    100040: transform3
-    100042: transform4
-    100044: transform5
-    100046: transform6
-    100048: transform7
-    100050: transform8
-    100052: transform9
-    100054: //RootNode
-    400000: pCube13
-    400002: pCube14
-    400004: pCube15
-    400006: pCube16
-    400008: pCube17
-    400010: pCube18
-    400012: pCube19
-    400014: pCube20
-    400016: pCube21
-    400018: pCube22
-    400020: pCube23
-    400022: pCube24
-    400024: pCube25
-    400026: pCube26
-    400028: transform1
-    400030: transform10
-    400032: transform11
-    400034: transform12
-    400036: transform13
-    400038: transform2
-    400040: transform3
-    400042: transform4
-    400044: transform5
-    400046: transform6
-    400048: transform7
-    400050: transform8
-    400052: transform9
-    400054: //RootNode
+    100000: //RootNode
+    400000: //RootNode
     2100000: lamp_wood
     2100002: transparent
-    2300000: pCube26
-    3300000: pCube26
+    2300000: //RootNode
+    3300000: //RootNode
     4300000: pCube26
     2186277476908879412: ImportLogs
   externalObjects: {}
