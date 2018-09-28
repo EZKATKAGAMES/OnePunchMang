@@ -43,49 +43,74 @@ public class Enemy : MonoBehaviour
         currentState = States.Idle;
     }
 
-    
+
     void Update()
     {
         angle += rotationSpeed * Time.deltaTime; //if you want to switch direction, use -= instead of +=
         x = Mathf.Cos(angle) * radius;
         z = Mathf.Sin(angle) * radius;
 
-        // Indetify target
-        target = GameObject.Find(targetID).GetComponent<Transform>().position;
-        
+        // Indetify look target (make sure only the head is looking)
+        target = FindObjectOfType<Camera>().transform.position;
+
+
 
 
         // Initialize circling state.
-        if(Vector3.Distance(gameObject.transform.position, target) <= distanceToEngage)
+        if (Vector3.Distance(gameObject.transform.position, target) <= distanceToEngage && currentState != States.Attack)
         {
             currentState = States.Circling;
         }
 
-        // Initialize attack state.
-        if(currentState == States.Circling)
+        // Attack function
+        if (currentState == States.Attack)
         {
+            // Get target
 
+            // Path to target
+            agent.SetDestination(target);
+            // When within range start attacking.
         }
 
         // Circle state functions
         if(currentState == States.Circling)
         {
+
+
+            // Adjust speed for circling state.
+
             // Look at the target
             Vector3 relativePosition = target - gameObject.transform.position;
             Quaternion rotation = Quaternion.LookRotation(relativePosition);
             transform.rotation = rotation;
 
             // Circle around the target
+            Vector3 direction;
+            direction = Vector3.Cross(relativePosition, Vector3.up);
+            agent.SetDestination(gameObject.transform.position + direction / 3);
 
-           
+            // Count to an interval and after that begin to attack.
+
+            StartCoroutine(InitializeAttack());
 
         }
 
-
+        
 
 
     }
 
+    IEnumerator InitializeAttack()
+    {
+
+        float randomTime;
+        randomTime = Random.Range(2, 5);
+
+        yield return new WaitForSeconds(randomTime);
+
+        currentState = States.Attack;
+        
+    }
 
 
 }
