@@ -25,9 +25,17 @@ public class Combat : MonoBehaviour
     // Get individual animators
     private Animator[] animations;
     private SphereCollider[] hands;
+    private Rigidbody rigi;
+
 
     private void Awake()
     {
+        if(CombatRef == null)
+        {
+            CombatRef = this;
+        }
+
+
         animations = gameObject.GetComponentsInChildren<Animator>();
         hands = gameObject.GetComponentsInChildren<SphereCollider>();
     }
@@ -36,7 +44,7 @@ public class Combat : MonoBehaviour
     {
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
-        
+        rigi = GetComponent<Rigidbody>();
     }
 
     
@@ -44,6 +52,8 @@ public class Combat : MonoBehaviour
     {
         SetPowerRating();
         PunchingAndBlock();
+
+        Debug.Log(rigi.velocity.magnitude);
 
         // When Performing a charged straight or right.
         if(Input.GetKey(KeyCode.Mouse0) || Input.GetKey(KeyCode.Mouse1))
@@ -63,7 +73,7 @@ public class Combat : MonoBehaviour
     {
         foreach (Animator components in animations)
         {
-            Debug.Log(components.name);
+
 
             #region Block
 
@@ -105,6 +115,7 @@ public class Combat : MonoBehaviour
             // Right hand
             if (!blocking && Input.GetKeyDown(KeyCode.Mouse1))
             {
+                
                 components.SetBool("RightStraight", true);
                 // enable collider
 

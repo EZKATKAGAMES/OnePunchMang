@@ -4,20 +4,25 @@ using UnityEngine;
 ///////////////////////////////////////////////////////////////////////////
 //
 // This script will calculate the power rating of your attack
-// based on the current state of your character / character components.
+// And call the outcomes after comparing scores.
 //
 //////////////////////////////////////////////////////////////////////////
 public class PowerRating : MonoBehaviour
 {
     public static PowerRating PWR = null;
     public float currentPlayerPowerRating; // Currently Updated Score.
+    public float currentLightEnemyPwrscore;
+    public float currentMediumEnemyPwrscore;
+    public float currentHeavyEnemyPwrscore;
+
     float playerPowerRating; // Used for calcutations.
 
     
     float playerEnemyRating; // Used for calcutations.
 
+    public bool winExchange = false;
 
-    private float enemyBasePowerRating = 25;
+    
 
     private void Awake()
     {
@@ -45,7 +50,7 @@ public class PowerRating : MonoBehaviour
 
     public void PlayerPowerRating(float PWR_)
     {
-        float playerBasePowerRating = 50;
+        float playerBasePowerRating = 2;
         #region Score Modifiers
         float hookBonus = 10;
         float powerStraightBonus = 30;
@@ -54,10 +59,7 @@ public class PowerRating : MonoBehaviour
         // PWR is equal to base before multipliers are applied.
         PWR_ = playerBasePowerRating;
 
-        // Successive Hits increase powerscore.
-
-
-
+        
         // LEAN & CROUCH & DODGE acts a multiplier altering the score.
         // Negate these scores from the current powerscore
         // after the next hit since the bonus was applied. (active only for that hit)
@@ -83,11 +85,29 @@ public class PowerRating : MonoBehaviour
 
     public void EnemyPowerRating(float PWR)
     {
-        float lightEnemyPwrscore = enemyBasePowerRating * 2;
-        float mediumEnemyPwrscore = enemyBasePowerRating * 2.5f;
-        float heavyEnemyPwrscore = enemyBasePowerRating * 3;
+        // Multiply the power depending on what tag enemy is.
 
+        float enemyBasePowerRating = 25;
 
+        PWR = enemyBasePowerRating;
+
+        if (gameObject.tag == "Light")
+        {
+            currentLightEnemyPwrscore = PWR * 2;
+        }
+        else if (gameObject.tag == "Medium")
+        {
+            currentMediumEnemyPwrscore = PWR * 2.5f;
+        }
+        else if (gameObject.tag == "Heavy")
+        {
+            currentHeavyEnemyPwrscore = PWR * 3;
+        }
+
+        
+        
+
+        
     }
 
     public void AssignPowerRating()
@@ -102,48 +122,66 @@ public class PowerRating : MonoBehaviour
 
         if (gameObject.CompareTag("Light"))
         {
-
+            EnemyPowerRating(currentLightEnemyPwrscore);
         }
 
         if (gameObject.CompareTag("Medium"))
         {
-
+            EnemyPowerRating(currentMediumEnemyPwrscore);
         }
 
         if (gameObject.CompareTag("Heavy"))
         {
-
+            EnemyPowerRating(currentHeavyEnemyPwrscore);
         }
 
     }
-    
+
 
     public void CompareRating(float score1, float score2)
     {
         float losingScore = Mathf.Min(score1, score2);
         float winningScore = Mathf.Max(score1, score2);
 
-        // Call take damage funciton
-        if(currentPlayerPowerRating <= losingScore)
+        if(losingScore < winningScore)
         {
-            // Figure out which limb called the function.
+            // All damage Applicaiton here.
 
-            // Take damage onto that limb.
+            // Player takes damage.
 
+            if(PWR.currentPlayerPowerRating < winningScore)
+            {
+
+            }
+
+
+            // Enemy takes damage.
+
+            
+
+            
         }
 
         // If we are hit and not blocking & did not parry.
         if (Combat.CombatRef.blocking == false && currentPlayerPowerRating < winningScore)
         {
-            // Dying in one hit.
-            BoneIntegrity.BoneHealth.TakeDamage(BoneIntegrity.BoneHealth.limbColliders, 100);
+            // die in one hit
         }
         
 
         // Apply damage onto enemy.
-        if (currentPlayerPowerRating == winningScore)
+        if (currentPlayerPowerRating >= winningScore)
         {
-            // Apply Damage onto enemy.
+            BoxCollider damageTaker = CheckforCollision.collisionRef.gameObject.GetComponent<BoxCollider>();
+            if (CheckforCollision.collisionRef.gameObject.tag == "Left")
+                damageTaker = GameObject.Find("FpLeft").GetComponent<BoxCollider>();
+            if (CheckforCollision.collisionRef.gameObject.tag == "Right")
+                damageTaker = GameObject.Find("FpRight").GetComponent<BoxCollider>();
+
+            EnemyBoneIntegrity.BoneHealth.TakeDamage(damageTaker, winningScore);
+
+
+
         }
 
 
