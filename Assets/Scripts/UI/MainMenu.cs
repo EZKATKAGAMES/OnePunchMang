@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class MainMenu : MonoBehaviour
 {
     public GUISkin mainMenuSkin;
-    public GUIStyle muteButton, playButton, optionsButton, exitButton, returnButton;
+    public GUIStyle muteButton;
     public Texture2D muteTex, unmuteTex;
     public bool showOP;
     public bool mute;
@@ -78,15 +78,19 @@ public class MainMenu : MonoBehaviour
         //GUI.Box(new Rect(5.9f * scrW, 6.4f * scrH, 4.2f * scrW, 0.5f * scrH), "Quit");
         if (!showOP)
         {
-            if (GUI.Button(new Rect (2f * scrW, 5.5f * scrH, 4f * scrW, 2f * scrH), "", playButton))
+            if (GUI.Button(new Rect (12f * scrW, 5.2f * scrH, 4f * scrW, 0.6f * scrH), "play"))
             {
                 SceneManager.LoadScene(1);
             }
-            if (GUI.Button(new Rect (6f * scrW, 5.5f * scrH, 4f * scrW, 2f * scrH), "", optionsButton))
+            if (GUI.Button(new Rect (12f * scrW, 6f * scrH, 4f * scrW, 0.6f * scrH), "options"))
             {
                 showOP = true;
             }
-            if (GUI.Button(new Rect (10f * scrW, 5.5f * scrH, 4f * scrW, 2f * scrH), "", exitButton))
+            if (GUI.Button(new Rect(12f * scrW, 6.8f * scrH, 4f * scrW, 0.6f * scrH), "credits"))
+            {
+
+            }
+                if (GUI.Button(new Rect (12f * scrW, 7.6f * scrH, 4f * scrW, 0.6f * scrH), "quit"))
             {
                 Application.Quit();
             }
@@ -111,7 +115,7 @@ public class MainMenu : MonoBehaviour
             GUI.Label(new Rect(7.35f * scrW, 6.45f * scrH, 2 * scrW, 0.8f * scrH), "Brightness!");
 
 
-            if (GUI.Button (new Rect (7.65f * scrW, 8 * scrH, 2 * scrW, 1 * scrH), "Return", returnButton))
+            if (GUI.Button (new Rect (7.65f * scrW, 8 * scrH, 2 * scrW, 1 * scrH), "Return"))
             {
                 SaveOptions();
                 showOP = false;
