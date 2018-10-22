@@ -39,6 +39,7 @@ namespace AFPC
 
         public virtual void Process()
         {
+           
             ProcessLookTarget();
 
             ProcessInput();

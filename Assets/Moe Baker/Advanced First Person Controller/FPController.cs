@@ -19,6 +19,7 @@ using Random = UnityEngine.Random;
 
 using Moe.Tools;
 
+
 namespace AFPC
 {
     [RequireComponent(typeof(Rigidbody), typeof(CapsuleCollider))]
@@ -56,7 +57,7 @@ namespace AFPC
             }
         }
 
-
+        
         new public Rigidbody rigidbody { get; protected set; }
         protected virtual void InitRigidBody()
         {
@@ -177,7 +178,7 @@ namespace AFPC
         protected virtual void Process()
         {
             ProcessInputModule();
-
+            
             Movement.Process();
 
             Look.Process();

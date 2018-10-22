@@ -18,6 +18,7 @@ public class MainMenu : MonoBehaviour
 
     void Start()
     {
+        muteButton.normal.background = unmuteTex;
         // Added the feature to mute the volume inside the game
         audi = GameObject.Find("Audio Source").GetComponent <AudioSource>();
         dirLight = GameObject.Find("Directional Light").GetComponent<Light>();
@@ -90,7 +91,7 @@ public class MainMenu : MonoBehaviour
             {
 
             }
-                if (GUI.Button(new Rect (12f * scrW, 7.6f * scrH, 4f * scrW, 0.6f * scrH), "quit"))
+            if (GUI.Button(new Rect (12f * scrW, 7.6f * scrH, 4f * scrW, 0.6f * scrH), "quit"))
             {
                 Application.Quit();
             }
@@ -98,30 +99,39 @@ public class MainMenu : MonoBehaviour
 
         else // else we are in the options menu
         {
+            if (audioSlider == 0)
+            {
+                muteButton.normal.background = muteTex;
+            }
+            else
+            {
+                muteButton.normal.background = unmuteTex;
+            }
+
             // Setting the values for the buttons inside the settings menu
             if (!mute)
             {
-                audioSlider = GUI.HorizontalSlider(new Rect(5.1f * scrW, 5.8f * scrH, 6 * scrW, 1 * scrH), audioSlider, 0f, 1f);
+                audioSlider = GUI.HorizontalSlider(new Rect(6.1f * scrW, 5.9f * scrH, 4 * scrW, 1 * scrH), audioSlider, 0f, 1f);
             }    
             else
             {
-                GUI.HorizontalSlider(new Rect(5.1f * scrW, 5.8f * scrH, 6 * scrW, 1 * scrH), audioSlider, 0f, 1f);
+                GUI.HorizontalSlider(new Rect(6.1f * scrW, 5.9f * scrH, 4 * scrW, 1 * scrH), audioSlider, 0f, 1f);
             }          
-            GUI.Label (new Rect (7.5f * scrW, 5.25f * scrH, 3 * scrW, 0.8f * scrH), "Volume!");
+            GUI.Label (new Rect (7f * scrW, 5.25f * scrH, 2 * scrW, 0.8f * scrH), "volume");
 
 
-            dirSlider = GUI.HorizontalSlider (new Rect(5.1f * scrW, 7.1f * scrH, 6 * scrW, 0.25f * scrH), dirSlider, 0f, 1f);
+            dirSlider = GUI.HorizontalSlider (new Rect(6.1f * scrW, 7.1f * scrH, 4 * scrW, 0.25f * scrH), dirSlider, 0f, 1f);
 
-            GUI.Label(new Rect(7.35f * scrW, 6.45f * scrH, 2 * scrW, 0.8f * scrH), "Brightness!");
+            GUI.Label(new Rect(7f * scrW, 6.45f * scrH, 2 * scrW, 0.8f * scrH), "brightness");
 
 
-            if (GUI.Button (new Rect (7.65f * scrW, 8 * scrH, 2 * scrW, 1 * scrH), "Return"))
+            if (GUI.Button (new Rect (7f * scrW, 8 * scrH, 2 * scrW, 1 * scrH), "return"))
             {
                 SaveOptions();
                 showOP = false;
             }
 
-            GUI.Label(new Rect(1.5f * scrW, 5.4f * scrH, 1.5f * scrW, 0.6f * scrH), "Mute!");
+            GUI.Label(new Rect(1.5f * scrW, 5.4f * scrH, 1.5f * scrW, 0.6f * scrH), "mute");
 
             if (GUI.Button(new Rect(1.2f * scrW, 6.1f * scrH, 1.5f * scrW, 0.6f * scrH), "", muteButton))
             {
