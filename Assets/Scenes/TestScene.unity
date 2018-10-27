@@ -34309,7 +34309,7 @@ MonoBehaviour:
   audi: {fileID: 1925973334}
   dirLight: {fileID: 1668039488}
   timer: 0
-  player: {fileID: 0}
+  player: {fileID: 1694526074}
 --- !u!4 &1925973333
 Transform:
   m_ObjectHideFlags: 0

@@ -22,8 +22,8 @@ public class PauseMenu : MonoBehaviour
     void Start()
     {
         // Added the feature to mute the volume inside the game
-        audi = GameObject.Find("Audio Source").GetComponent<AudioSource>();
-        dirLight = GameObject.Find("Directional Light").GetComponent<Light>();
+        //audi = GameObject.Find("Audio Source").GetComponent<AudioSource>();
+        //dirLight = GameObject.Find("Directional Light").GetComponent<Light>();
 
         if (PlayerPrefs.HasKey("Volume"))
         {
@@ -52,14 +52,18 @@ public class PauseMenu : MonoBehaviour
         dirSlider = dirLight.intensity;
     }
 
-    void FixedUpdate()
+    private void Update()
     {
-        // Pause the game if the escape key is pressed to go into the menu
-        timer += Time.deltaTime;
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             TogglePause();
         }
+    }
+
+    void FixedUpdate()
+    {
+        // Pause the game if the escape key is pressed to go into the menu
+        timer += Time.deltaTime;
 
         // Changes the volume of game to match the volume that the user set
         if (audi.volume != audioSlider)
@@ -93,7 +97,6 @@ public class PauseMenu : MonoBehaviour
             player.GetComponent<Combat>().enabled = false;
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
-   
             paused = true;
             Time.timeScale = 0;
             return true;
