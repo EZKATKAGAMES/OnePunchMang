@@ -53,7 +53,7 @@ public class Combat : MonoBehaviour
         SetPowerRating();
         PunchingAndBlock();
 
-        Debug.Log(rigi.velocity.magnitude);
+        //Debug.Log(rigi.velocity.magnitude);
 
         // When Performing a charged straight or right.
         if(Input.GetKey(KeyCode.Mouse0) || Input.GetKey(KeyCode.Mouse1))

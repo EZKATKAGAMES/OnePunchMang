@@ -93,15 +93,18 @@ public class PowerRating : MonoBehaviour
 
         if (gameObject.tag == "Light")
         {
-            currentLightEnemyPwrscore = PWR * 2;
+           PWR = enemyBasePowerRating * PWR * 2;
+            currentLightEnemyPwrscore = PWR;
         }
         else if (gameObject.tag == "Medium")
         {
-            currentMediumEnemyPwrscore = PWR * 2.5f;
+            PWR = enemyBasePowerRating * PWR * 2.5f;
+            currentMediumEnemyPwrscore = PWR;
         }
         else if (gameObject.tag == "Heavy")
         {
-            currentHeavyEnemyPwrscore = PWR * 3;
+            PWR = enemyBasePowerRating * PWR * 3;
+            currentHeavyEnemyPwrscore = PWR;
         }
 
         
@@ -143,6 +146,30 @@ public class PowerRating : MonoBehaviour
         float losingScore = Mathf.Min(score1, score2);
         float winningScore = Mathf.Max(score1, score2);
 
+        string enemyType = "ree";
+
+        #region determineType
+        if(score1 == currentLightEnemyPwrscore || score2 == currentLightEnemyPwrscore)
+        {
+            enemyType = "Light";
+        }
+        if(score1 == currentMediumEnemyPwrscore || score2 == currentMediumEnemyPwrscore)
+        {
+            enemyType = "Medium";
+        }
+        if(score1 == currentHeavyEnemyPwrscore || score2 == currentHeavyEnemyPwrscore)
+        {
+            enemyType = "Heavy";
+        }
+
+        #endregion
+
+        GameObject playerRef = GameObject.FindGameObjectWithTag("Player");
+        GameObject enemyRef = GameObject.FindGameObjectWithTag(enemyType);
+
+        Rigidbody pRB = playerRef.GetComponent<Rigidbody>(); // Player
+        Rigidbody eRB = enemyRef.GetComponent<Rigidbody>(); // Enemy
+
 		// All damage Applicaiton here.
         if(losingScore < winningScore)
         {
@@ -159,7 +186,9 @@ public class PowerRating : MonoBehaviour
             // Enemy takes damage.
             if(PWR.currentPlayerPowerRating > losingScore)
 			{
-				
+                Vector3 knockForce = transform.position - playerRef.transform.position;
+
+                eRB.AddForce(knockForce.normalized * 500f, ForceMode.Impulse);
 			}
 
             

@@ -15,18 +15,20 @@ public class AI : MonoBehaviour
     private int currentEnemyState = 0;          //Start with defend
     enum enemyState { Defend, Attack, Dodge};
     private NavMeshAgent aiAgent;
+    private Vector3 moveLocation;
   
     // Use this for initialization
     void Start()
     {
         aiAgent = GetComponent<NavMeshAgent>();
-		
+        moveLocation = tracker.transform.position;   //Set initial location
+        aiAgent.SetDestination(moveLocation); //Chase Player
     }
 
     // Update is called once per frame
     void Update()
     {
-		FacePlayer()
+        FacePlayer();
         EnemyBehaviour();
     }
 
@@ -52,25 +54,28 @@ public class AI : MonoBehaviour
 
         if (distanceToEnemy > maxAttackRange)
         {
-            aiAgent.SetDestination = tracker.transform.position; //Chase Player
-			
-     
+
+            aiAgent.speed = 0.5f;
+
         }
         else
         {
-            //aiAgent.destination = transform.position;         //Stop chasing 
+            aiAgent.speed = 1.2f;
             StartCoroutine(GenerateNewDestination());
-            
+
+            //aiAgent.destination = transform.position;         //Stop chasing 
+            //StartCoroutine(GenerateNewDestination());  
         }
 
 
-        print(distanceToEnemy);
+       // print(distanceToEnemy);
     }
 
     IEnumerator GenerateNewDestination()
     {
-        aiAgent.destination = tracker.transform.position + Random.onUnitSphere * 15;
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(5f);
+        moveLocation = tracker.transform.position;
+        aiAgent.SetDestination(moveLocation); //Chase Player
     }
 
     void Attack()
@@ -97,7 +102,7 @@ public class AI : MonoBehaviour
 	
 	private void FacePlayer()
 	{
-			Vector3 direction = (player.position - transform.position).normalized;
+			Vector3 direction = (player.transform.position - transform.position).normalized;
             Quaternion lookRotation = Quaternion.LookRotation(direction);
             transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * rotationSpeed);
 	}
