@@ -9,6 +9,10 @@ TagManager:
   - Heavy
   - Left
   - Right
+  - LeftTracker
+  - RightTracker
+  - FrontTracker
+  - RearTracker
   layers:
   - Default
   - TransparentFX

@@ -8,7 +8,7 @@ public class AI : MonoBehaviour
     //Public
     public GameObject tracker;
 	public GameObject player;
-    public float maxAttackRange = 5.0f;
+    public float maxAttackRange = 1.0f;
 	public float rotationSpeed = 10.0f;
 	
     //Private
@@ -50,32 +50,20 @@ public class AI : MonoBehaviour
 
     void Defend()
     {
-        float distanceToEnemy = Vector3.Distance(tracker.transform.position, transform.position); //Determine Distance
+        float distanceToTracker = Vector3.Distance(moveLocation, transform.position); //Determine Distance
 
-        if (distanceToEnemy > maxAttackRange)
+        if (distanceToTracker <= maxAttackRange)
         {
-
-            aiAgent.speed = 0.5f;
-
+            moveLocation = tracker.transform.position;
         }
-        else
-        {
-            aiAgent.speed = 1.2f;
-            StartCoroutine(GenerateNewDestination());
-
-            //aiAgent.destination = transform.position;         //Stop chasing 
-            //StartCoroutine(GenerateNewDestination());  
-        }
-
 
        // print(distanceToEnemy);
     }
 
-    IEnumerator GenerateNewDestination()
+    IEnumerator TrackerLocation()
     {
-        yield return new WaitForSeconds(5f);
-        moveLocation = tracker.transform.position;
-        aiAgent.SetDestination(moveLocation); //Chase Player
+        yield return new WaitForSeconds(2f);
+        
     }
 
     void Attack()

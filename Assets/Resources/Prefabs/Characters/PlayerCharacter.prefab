@@ -311,6 +311,7 @@ GameObject:
   - component: {fileID: 136851253998188494}
   - component: {fileID: 114247946020378690}
   - component: {fileID: 114238949478882938}
+  - component: {fileID: 65977715748459386}
   m_Layer: 8
   m_Name: PlayerCharacter
   m_TagString: Player
@@ -424,8 +425,8 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1966008435915054}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 12.26, y: 0.4700861, z: -1.160759}
+  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 25.01, y: 0.4700861, z: -1.160759}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4454632184544076}
@@ -433,7 +434,7 @@ Transform:
   - {fileID: 4839024674628936}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!4 &4316713578333124
 Transform:
   m_ObjectHideFlags: 1
@@ -539,7 +540,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1227181329880970}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.146, y: 1.296, z: 1.895}
+  m_LocalPosition: {x: 1.146, y: 1.296, z: 2.594}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children:
   - {fileID: 4185065073796636}
@@ -802,11 +803,23 @@ BoxCollider:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1860882323468524}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 6, y: 10, z: 6.5}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!65 &65977715748459386
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1966008435915054}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.99, y: 2, z: 2.5}
+  m_Center: {x: 0, y: 1, z: 1.5}
 --- !u!81 &81837704862907134
 AudioListener:
   m_ObjectHideFlags: 1
@@ -1169,7 +1182,7 @@ MonoBehaviour:
   walk:
     height: 1.8
     radius: 0.4
-    speed: 9.6
+    speed: 2
   crouch:
     height: 1
     radius: 0.4
@@ -1512,7 +1525,7 @@ SphereCollider:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1227181329880970}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.5
