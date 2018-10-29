@@ -25,6 +25,7 @@ GameObject:
   - component: {fileID: 54836818907966392}
   - component: {fileID: 195484145686131260}
   - component: {fileID: 114252926186504912}
+  - component: {fileID: 114889139454866386}
   m_Layer: 10
   m_Name: Enemy
   m_TagString: Medium
@@ -92,7 +93,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1238042897426266}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.5, z: 0}
+  m_LocalPosition: {x: 24.798145, y: 1.1250143, z: -0.8304138}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4809523036867576}
@@ -128,7 +129,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: d87d34e16cef0e74e80ace684d475e40, type: 2}
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -337,16 +338,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd364a5f434db334e87cb91b6ea2ea23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  distanceToEngage: 10
-  distanceTilCircle: 5
-  agent: {fileID: 195484145686131260}
-  target: {x: 2.026465, y: 1.7999997, z: -3.985201}
-  targetID: PlayerCharacter
-  isHit: 0
-  takenDamage: 0
-  animations: []
-  rotationSpeed: 1.2566371
-  currentState: 1
 --- !u!114 &114253642406018414
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -359,6 +350,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LeftorRight: 0
+  currentFigherClass: 
+  useScore: 0
 --- !u!114 &114706300618200880
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -371,6 +364,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LeftorRight: 1
+  currentFigherClass: 
+  useScore: 0
+--- !u!114 &114889139454866386
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1238042897426266}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd65db44c75fe0946b8827b4921c2502, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemy: {fileID: 0}
+  maxAttackRange: 5
 --- !u!195 &195484145686131260
 NavMeshAgent:
   m_ObjectHideFlags: 1
@@ -381,10 +389,10 @@ NavMeshAgent:
   m_AgentTypeID: 0
   m_Radius: 0.5
   m_Speed: 3.5
-  m_Acceleration: 8
+  m_Acceleration: 100
   avoidancePriority: 50
   m_AngularSpeed: 120
-  m_StoppingDistance: 3
+  m_StoppingDistance: 0
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1

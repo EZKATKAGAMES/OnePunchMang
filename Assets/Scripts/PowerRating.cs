@@ -143,12 +143,13 @@ public class PowerRating : MonoBehaviour
         float losingScore = Mathf.Min(score1, score2);
         float winningScore = Mathf.Max(score1, score2);
 
+		// All damage Applicaiton here.
         if(losingScore < winningScore)
         {
-            // All damage Applicaiton here.
+            
 
-            // Player takes damage.
-
+            
+			// Player takes damage.
             if(PWR.currentPlayerPowerRating < winningScore)
             {
 
@@ -156,8 +157,10 @@ public class PowerRating : MonoBehaviour
 
 
             // Enemy takes damage.
-
-            
+            if(PWR.currentPlayerPowerRating > losingScore)
+			{
+				
+			}
 
             
         }

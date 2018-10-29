@@ -6,9 +6,11 @@ using UnityEngine.AI;
 public class AI : MonoBehaviour
 {
     //Public
-    public GameObject enemy;
+    public GameObject tracker;
+	public GameObject player;
     public float maxAttackRange = 5.0f;
-
+	public float rotationSpeed = 10.0f;
+	
     //Private
     private int currentEnemyState = 0;          //Start with defend
     enum enemyState { Defend, Attack, Dodge};
@@ -18,11 +20,13 @@ public class AI : MonoBehaviour
     void Start()
     {
         aiAgent = GetComponent<NavMeshAgent>();
+		
     }
 
     // Update is called once per frame
     void Update()
     {
+		FacePlayer()
         EnemyBehaviour();
     }
 
@@ -44,11 +48,13 @@ public class AI : MonoBehaviour
 
     void Defend()
     {
-        float distanceToEnemy = Vector3.Distance(enemy.transform.position, transform.position); //Determine Distance
+        float distanceToEnemy = Vector3.Distance(tracker.transform.position, transform.position); //Determine Distance
 
         if (distanceToEnemy > maxAttackRange)
         {
-            aiAgent.destination = enemy.transform.position;     //Chase Player
+            aiAgent.SetDestination = tracker.transform.position; //Chase Player
+			
+     
         }
         else
         {
@@ -63,7 +69,7 @@ public class AI : MonoBehaviour
 
     IEnumerator GenerateNewDestination()
     {
-        aiAgent.destination = enemy.transform.position + Random.onUnitSphere * 15;
+        aiAgent.destination = tracker.transform.position + Random.onUnitSphere * 15;
         yield return new WaitForSeconds(2f);
     }
 
@@ -77,4 +83,22 @@ public class AI : MonoBehaviour
     {
        // print("Dodge");
     }
+	
+	
+	void OnTriggerStay(Collider col)
+	{
+		if(col.gameObject.tag == "stateChanger"){
+			
+			// Switch states to attack when we are inside this collider
+			currentEnemyState = 1; // Attacking state.
+			
+		}
+	}
+	
+	private void FacePlayer()
+	{
+			Vector3 direction = (player.position - transform.position).normalized;
+            Quaternion lookRotation = Quaternion.LookRotation(direction);
+            transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * rotationSpeed);
+	}
 }
