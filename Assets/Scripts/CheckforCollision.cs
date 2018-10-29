@@ -22,18 +22,18 @@ public class CheckforCollision : MonoBehaviour
             collisionRef = this;
         }
 
-        if(gameObject.GetComponentInParent<GameObject>().CompareTag("Light"))
-        {
-            useScore = PowerRating.PWR.currentLightEnemyPwrscore;
-        }
-        if (gameObject.GetComponentInParent<GameObject>().CompareTag("Medium"))
-        {
-            useScore = PowerRating.PWR.currentMediumEnemyPwrscore;
-        }
-        if (gameObject.GetComponentInParent<GameObject>().CompareTag("Heavy"))
-        {
-            useScore = PowerRating.PWR.currentHeavyEnemyPwrscore;
-        }
+        //if(gameObject.GetComponentInParent<GameObject>().CompareTag("Light"))
+        //{
+        //    useScore = PowerRating.PWR.currentLightEnemyPwrscore;
+        //}
+        //if (gameObject.GetComponentInParent<GameObject>().CompareTag("Medium"))
+        //{
+        //    useScore = PowerRating.PWR.currentMediumEnemyPwrscore;
+        //}
+        //if (gameObject.GetComponentInParent<GameObject>().CompareTag("Heavy"))
+        //{
+        //    useScore = PowerRating.PWR.currentHeavyEnemyPwrscore;
+        //}
 
         
 
