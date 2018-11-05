@@ -92,15 +92,15 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1238042897426266}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 24.798145, y: 1.1250143, z: -0.8304138}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4809523036867576}
   - {fileID: 4565627894561042}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!4 &4809523036867576
 Transform:
   m_ObjectHideFlags: 1
@@ -377,8 +377,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd65db44c75fe0946b8827b4921c2502, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemy: {fileID: 0}
+  tracker: {fileID: 0}
+  player: {fileID: 0}
   maxAttackRange: 5
+  rotationSpeed: 10
 --- !u!195 &195484145686131260
 NavMeshAgent:
   m_ObjectHideFlags: 1

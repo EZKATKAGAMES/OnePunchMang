@@ -21,6 +21,7 @@ public class PauseMenu : MonoBehaviour
 
     void Start()
     {
+        player = GameObject.FindWithTag("Player");
         // Added the feature to mute the volume inside the game
         //audi = GameObject.Find("Audio Source").GetComponent<AudioSource>();
         //dirLight = GameObject.Find("Directional Light").GetComponent<Light>();

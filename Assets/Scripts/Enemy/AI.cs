@@ -20,6 +20,8 @@ public class AI : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        player = GameObject.FindWithTag("Player");
+        tracker = GameObject.FindWithTag("FrontTracker");
         aiAgent = GetComponent<NavMeshAgent>();
         moveLocation = tracker.transform.position;   //Set initial location
         aiAgent.SetDestination(moveLocation); //Chase Player
