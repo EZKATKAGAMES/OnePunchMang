@@ -10,6 +10,9 @@ public class EnemyStatsManager : MonoBehaviour
 {
     [HideInInspector]
     public EnemyNavigationManager reference;
+
+    public static EnemyStatsManager statRef = null;
+
     #region Variables
     [Header("Health")]
     public float health;
@@ -20,6 +23,7 @@ public class EnemyStatsManager : MonoBehaviour
     [Header("Combat")]
     public float blockStamina;
     public float attackSpeed;
+    public int powerScore;
 
     // Scaling Modifiers
     float timer;
@@ -39,6 +43,15 @@ public class EnemyStatsManager : MonoBehaviour
 
 
     #endregion
+
+
+    private void Awake()
+    {
+        if(statRef == null)
+        {
+            statRef = this;
+        }
+    }
 
     void Start()
     {
@@ -63,6 +76,7 @@ public class EnemyStatsManager : MonoBehaviour
                 blockStamina = 20f;
                 attackSpeed = 2.5f;
                 scaleID = 0;
+                powerScore = 30;
                 break;
 
             case "Light":
@@ -73,6 +87,7 @@ public class EnemyStatsManager : MonoBehaviour
                 blockStamina = 20f;
                 attackSpeed = 2.5f;
                 scaleID = 0;
+                powerScore = 30;
                 break;
 
             case "Medium":
@@ -83,6 +98,7 @@ public class EnemyStatsManager : MonoBehaviour
                 blockStamina = 45f;
                 attackSpeed = 1f;
                 scaleID = 1;
+                powerScore = 45;
                 break;
 
             case "Heavy":
@@ -93,6 +109,7 @@ public class EnemyStatsManager : MonoBehaviour
                 blockStamina = 80f;
                 attackSpeed = 0.6f;
                 scaleID = 2;
+                powerScore = 50;
                 break;
 
         }

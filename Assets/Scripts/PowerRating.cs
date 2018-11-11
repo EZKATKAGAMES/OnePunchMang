@@ -91,19 +91,18 @@ public class PowerRating : MonoBehaviour
 
         PWR = enemyBasePowerRating;
 
+        PWR += EnemyStatsManager.statRef.powerScore;
+
         if (gameObject.tag == "Light")
         {
-           PWR = enemyBasePowerRating * PWR * 2;
             currentLightEnemyPwrscore = PWR;
         }
         else if (gameObject.tag == "Medium")
         {
-            PWR = enemyBasePowerRating * PWR * 2.5f;
             currentMediumEnemyPwrscore = PWR;
         }
         else if (gameObject.tag == "Heavy")
         {
-            PWR = enemyBasePowerRating * PWR * 3;
             currentHeavyEnemyPwrscore = PWR;
         }
 
@@ -125,7 +124,7 @@ public class PowerRating : MonoBehaviour
 
         if (gameObject.CompareTag("Light"))
         {
-            EnemyPowerRating(currentLightEnemyPwrscore);
+            
         }
 
         if (gameObject.CompareTag("Medium"))

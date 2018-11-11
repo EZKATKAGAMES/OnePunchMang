@@ -82,3 +82,5 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+Assets/Resources/character/animations.meta
+Assets/Resources/character.meta
